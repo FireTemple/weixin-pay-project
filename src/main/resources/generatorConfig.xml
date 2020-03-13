@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置  -->
+    <classPathEntry location="/Users/bohanxiao/Downloads/WebTools/maven-repository/mysql/mysql-connector-java/5.1.16/mysql-connector-java-5.1.16.jar" />
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="MysqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="utf-8"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/weixin_project" userId="root"
+                        password="root"/>
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.bohan.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator targetPackage="com.bohan.mapper" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+        <table tableName="chapter" domainObjectName="Chapter"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="true">
+            <columnOverride column="id" javaType="java.lang.Integer"/>
+            <columnOverride column="video_id" javaType="java.lang.Integer"/>
+            <columnOverride column="title" javaType="java.lang.String"/>
+            <columnOverride column="ordered" javaType="java.lang.Integer"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+        </table>
+
+        <table tableName="comment" domainObjectName="Comment"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="true">
+            <columnOverride column="id" javaType="java.lang.Integer"/>
+            <columnOverride column="content" javaType="java.lang.String"/>
+            <columnOverride column="user_id" javaType="java.lang.Integer"/>
+            <columnOverride column="head_img" javaType="java.lang.String"/>
+            <columnOverride column="name" javaType="java.lang.String"/>
+            <columnOverride column="point" javaType="java.lang.Double"/>
+            <columnOverride column="up" javaType="java.lang.Integer"/>
+            <columnOverride column="create_time" javaType="java.lang.String"/>
+            <columnOverride column="order_id" javaType="java.lang.Integer"/>
+            <columnOverride column="video_id" javaType="java.lang.Integer"/>
+        </table>
+
+        <table tableName="episode" domainObjectName="Episode"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="true">
+            <columnOverride column="id" javaType="java.lang.Integer"/>
+            <columnOverride column="title" javaType="java.lang.String"/>
+            <columnOverride column="num" javaType="java.lang.Integer"/>
+            <columnOverride column="duration" javaType="java.lang.String"/>
+            <columnOverride column="cover_img" javaType="java.lang.String"/>
+            <columnOverride column="video_id" javaType="java.lang.Integer"/>
+            <columnOverride column="summary" javaType="java.lang.String"/>
+            <columnOverride column="create_time" javaType="java.sql.Timestamp"/>
+            <columnOverride column="chapter_id" javaType="java.lang.Integer"/>
+        </table>
+
+        <table tableName="user" domainObjectName="User"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="true">
+            <columnOverride column="id" javaType="java.lang.Integer"/>
+            <columnOverride column="openid" javaType="java.lang.Integer"/>
+            <columnOverride column="name" javaType="java.lang.String"/>
+            <columnOverride column="head_img" javaType="java.lang.String"/>
+            <columnOverride column="phone" javaType="java.lang.String"/>
+            <columnOverride column="sign" javaType="java.lang.String"/>
+            <columnOverride column="sex" javaType="java.lang.Integer"/>
+            <columnOverride column="city" javaType="java.lang.String"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+        </table>
+
+        <table tableName="video" domainObjectName="Video"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="true">
+            <columnOverride column="id" javaType="java.lang.Integer"/>
+            <columnOverride column="title" javaType="java.lang.String"/>
+            <columnOverride column="summary" javaType="java.lang.String"/>
+            <columnOverride column="cover_img" javaType="java.lang.String"/>
+            <columnOverride column="view_num" javaType="java.lang.Integer"/>
+            <columnOverride column="price" javaType="java.lang.Integer"/>
+            <columnOverride column="online" javaType="java.lang.Integer"/>
+            <columnOverride column="point" javaType="java.lang.Double"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+        </table>
+
+        <table tableName="video_order" domainObjectName="videoOrder"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="true">
+            <columnOverride column="id" javaType="java.lang.Integer"/>
+            <columnOverride column="openid" javaType="java.lang.String"/>
+            <columnOverride column="out_trade_no" javaType="java.lang.String"/>
+            <columnOverride column="state" javaType="java.lang.Integer"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="notify_time" javaType="java.util.Date"/>
+            <columnOverride column="nickname" javaType="java.lang.String"/>
+            <columnOverride column="head_img" javaType="java.lang.String"/>
+            <columnOverride column="video_id" javaType="java.lang.Integer"/>
+            <columnOverride column="video_title" javaType="java.lang.String"/>
+            <columnOverride column="video_img" javaType="java.lang.String"/>
+            <columnOverride column="user_id" javaType="java.lang.Integer"/>
+            <columnOverride column="ip" javaType="java.lang.String"/>
+            <columnOverride column="del" javaType="java.lang.Integer"/>
+        </table>
+
+    </context>
+
+</generatorConfiguration>
+
