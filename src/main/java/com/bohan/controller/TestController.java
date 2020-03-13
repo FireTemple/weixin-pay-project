@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/test")
@@ -40,12 +42,17 @@ public class TestController {
     }
 
     @GetMapping("/testPageHelper")
-    public PageInfo<Video> testPageHelper(@RequestParam(value = "page", defaultValue = "1")int page,
+    public Object testPageHelper(@RequestParam(value = "page", defaultValue = "1")int page,
                                           @RequestParam(value = "size", defaultValue = "10")int size){
         PageHelper.startPage(page, size);
         List<Video> videos = videoService.findAll();
         PageInfo<Video> pageInfo = new PageInfo<>(videos);
-        return pageInfo;
+        Map<String, Object> data = new HashMap<>();
+        data.put("total_size", pageInfo.getTotal());
+        data.put("total_page", pageInfo.getPages());
+        data.put("current_page", pageInfo.getPageNum());
+        data.put("dara", pageInfo.getList());
+        return data;
 
     }
 }
